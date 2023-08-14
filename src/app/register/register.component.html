@@ -1,10 +1,12 @@
-<form>
+<form [formGroup]="registerForm">
     <div>
-        <label for="userName"></label>
-        <input type="text" id="userName">
+        <label for="userName">User name:</label>
+        <input type="text" id="userName" formControlName="userName">
     </div>
     <div>
-        <label for="password"></label>
-        <input type="text" id="password">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password">
     </div>
+
+    <button type="submit">Submit!</button>
 </form>
