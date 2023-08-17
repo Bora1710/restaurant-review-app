@@ -6,7 +6,7 @@ import { HttpResponse } from '../shared/Models/http';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginApiService {
+export class AuthenticationService {
   baseUrl = 'http://localhost:8080/register';
 
   constructor(private http: HttpClient) {}
