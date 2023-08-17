@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent {
   registerForm = new FormGroup({
     userName: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
   });
+
+  constructor(private registerService: AuthenticationService) {}
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      const userName = this.registerForm.value.userName as string;
+      const password = this.registerForm.value.password as string;
+      const role = 2 as number;
+
+      this.registerService
+        .register(userName, password, role)
+        .subscribe((payLoad) => {});
+    }
+  }
 }
