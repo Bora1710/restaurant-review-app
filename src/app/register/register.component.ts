@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisterApiService } from '../services/register-api.service';
+import { LoginApiService } from '../services/login-api.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ export class RegisterComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private registerService: RegisterApiService) {}
+  constructor(private registerService: LoginApiService) {}
 
   onSubmit() {
     if (this.registerForm.valid) {

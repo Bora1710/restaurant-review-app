@@ -7,6 +7,8 @@ import { HttpResponse } from '../shared/Models/http';
   providedIn: 'root',
 })
 export class LoginApiService {
+  baseUrl = 'http://localhost:8080/register';
+
   constructor(private http: HttpClient) {}
 
   login(userName: string, password: string) {
@@ -20,5 +22,16 @@ export class LoginApiService {
           }
         })
       );
+  }
+
+  register(userName: string, password: string, role: number) {
+    let loginData = { userName: userName, password: password, role: role };
+    return this.http.post<HttpResponse>(`${this.baseUrl}`, loginData).pipe(
+      map((response) => {
+        if (response.isSuccess) {
+          return response.payLoad;
+        }
+      })
+    );
   }
 }
