@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { RestaurantService } from '../services/restaurant.service';
+import { Restaurant } from '../shared/Models/restaurant';
 
 @Component({
   selector: 'app-newrestaurant',
@@ -8,7 +10,18 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class NewrestaurantComponent {
   restaurantForm = new FormGroup({
-    name: new FormControl<string>(''),
-    description: new FormControl<string>(''),
+    name: new FormControl(''),
+    description: new FormControl(''),
   });
+
+  constructor(private restaurantService: RestaurantService) {}
+
+  onSubmit() {
+    if (this.restaurantForm.valid) {
+      let value: Restaurant = this.restaurantForm.value as Restaurant;
+      value.dateOfCreation = new Date();
+
+      this.restaurantService.newRestaurant(value).subscribe((payLoad) => {});
+    }
+  }
 }
