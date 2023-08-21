@@ -10,12 +10,23 @@ import { Restaurant } from '../shared/Models/restaurant';
 })
 export class RestaurantService {
   private restaurantIdUrl = url.restaurantIdUrl;
+  private restaurantListUrl = url.restaurantListUrl;
 
   constructor(private http: HttpClient) {}
 
   newRestaurant(restaurant: Restaurant) {
     let body = { selectedRestaurant: restaurant };
     return this.http.post<HttpResponse>(`${this.restaurantIdUrl}`, body).pipe(
+      map((response) => {
+        if (response.isSuccess) {
+          return response.payLoad;
+        }
+      })
+    );
+  }
+
+  getRestaurant() {
+    return this.http.get<HttpResponse>(`${this.restaurantListUrl}`).pipe(
       map((response) => {
         if (response.isSuccess) {
           return response.payLoad;
