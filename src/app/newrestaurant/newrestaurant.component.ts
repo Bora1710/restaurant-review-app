@@ -26,7 +26,7 @@ export class NewrestaurantComponent {
       value.dateOfCreation = new Date();
 
       this.restaurantService.newRestaurant(value).subscribe((payLoad) => {
-        payLoad ? this.router.navigate(['/restaurant-list']) : null;
+        payLoad ? this.router.navigate(['/restaurants']) : null;
       });
     }
   }

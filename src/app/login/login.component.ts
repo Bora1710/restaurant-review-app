@@ -26,7 +26,7 @@ export class LoginComponent {
 
       this.loginService.login(userName, password).subscribe((payLoad) => {
         if (payLoad) {
-          this.router.navigate(['/restaurant-list']);
+          this.router.navigate(['/restaurants']);
         }
       });
     }
