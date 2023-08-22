@@ -9,24 +9,25 @@ import { Restaurant } from '../shared/Models/restaurant';
   providedIn: 'root',
 })
 export class RestaurantService {
-  private restaurantIdUrl = url.restaurantIdUrl;
-  private restaurantListUrl = url.restaurantListUrl;
+  private restaurantsUrl = url.restaurantsUrl;
 
   constructor(private http: HttpClient) {}
 
   newRestaurant(restaurant: Restaurant) {
     let body = { selectedRestaurant: restaurant };
-    return this.http.post<HttpResponse>(`${this.restaurantIdUrl}`, body).pipe(
-      map((response) => {
-        if (response.isSuccess) {
-          return response.payLoad;
-        }
-      })
-    );
+    return this.http
+      .post<HttpResponse>(`${this.restaurantsUrl}/add`, body)
+      .pipe(
+        map((response) => {
+          if (response.isSuccess) {
+            return response.payLoad;
+          }
+        })
+      );
   }
 
   getRestaurants() {
-    return this.http.get<HttpResponse>(`${this.restaurantListUrl}`).pipe(
+    return this.http.get<HttpResponse>(`${this.restaurantsUrl}`).pipe(
       map((response) => {
         if (response.isSuccess) {
           return response.payLoad;
