@@ -15,7 +15,7 @@ export class RegisterComponent {
   });
 
   constructor(
-    private registerService: AuthenticationService,
+    private authService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -25,7 +25,7 @@ export class RegisterComponent {
       const password = this.registerForm.value.password as string;
       const role = 2 as number;
 
-      this.registerService
+      this.authService
         .register(userName, password, role)
         .subscribe((payLoad) => {
           payLoad ? this.router.navigate(['/login']) : null;

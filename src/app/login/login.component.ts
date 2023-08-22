@@ -15,7 +15,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private loginService: AuthenticationService,
+    private authService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -24,7 +24,7 @@ export class LoginComponent {
       const userName = this.loginForm.value.userName!;
       const password = this.loginForm.value.password!;
 
-      this.loginService.login(userName, password).subscribe((payLoad) => {
+      this.authService.login(userName, password).subscribe((payLoad) => {
         if (payLoad) {
           this.router.navigate(['/restaurants']);
         }
