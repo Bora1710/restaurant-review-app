@@ -9,9 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NewrestaurantComponent } from './newrestaurant/newrestaurant.component';
 import { RestaurantlistComponent } from './restaurantlist/restaurantlist.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent, RestaurantComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
