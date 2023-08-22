@@ -1,5 +1,5 @@
 <section *ngFor="let restaurant of restaurantList">
-  <div class="restaurant">
+  <div [routerLink]="['/restaurants', restaurant.id]" class="restaurant">
     <div>
       <p>Name: {{ restaurant.name }}</p>
     </div>
