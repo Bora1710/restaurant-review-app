@@ -1,0 +1,15 @@
+<section *ngFor="let restaurant of restaurantList">
+  <div class="restaurant">
+    <div>
+      <p>Name: {{ restaurant.name }}</p>
+    </div>
+    <div>
+      <p>Description: {{ restaurant.description }}</p>
+    </div>
+    <div>
+      <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
+    </div>
+  </div>
+</section>
+
+<button type="button" routerLink="/restaurants/new">Add new restaurant</button>

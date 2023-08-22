@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,21 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private loginService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     if (this.loginForm.valid) {
       const userName = this.loginForm.value.userName!;
       const password = this.loginForm.value.password!;
 
-      this.loginService.login(userName, password).subscribe((payLoad) => {});
+      this.authService.login(userName, password).subscribe((payLoad) => {
+        if (payLoad) {
+          this.router.navigate(['/restaurants']);
+        }
+      });
     }
   }
 }

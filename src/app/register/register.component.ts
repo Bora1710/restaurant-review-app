@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,10 @@ export class RegisterComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private registerService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     if (this.registerForm.valid) {
@@ -21,9 +25,11 @@ export class RegisterComponent {
       const password = this.registerForm.value.password as string;
       const role = 2 as number;
 
-      this.registerService
+      this.authService
         .register(userName, password, role)
-        .subscribe((payLoad) => {});
+        .subscribe((payLoad) => {
+          payLoad ? this.router.navigate(['/login']) : null;
+        });
     }
   }
 }
