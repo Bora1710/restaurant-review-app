@@ -10,7 +10,7 @@ import { Restaurant } from '../shared/Models/restaurant';
 export class RestaurantlistComponent {
   restaurantList: Restaurant[] = [];
   constructor(private restaurantService: RestaurantService) {
-    this.restaurantService.getRestaurant().subscribe((payLoad) => {
+    this.restaurantService.getRestaurants().subscribe((payLoad) => {
       this.restaurantList = payLoad;
     });
   }

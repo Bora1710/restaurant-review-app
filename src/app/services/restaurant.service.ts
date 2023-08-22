@@ -25,7 +25,7 @@ export class RestaurantService {
     );
   }
 
-  getRestaurant() {
+  getRestaurants() {
     return this.http.get<HttpResponse>(`${this.restaurantListUrl}`).pipe(
       map((response) => {
         if (response.isSuccess) {
