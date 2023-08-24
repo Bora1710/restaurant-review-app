@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '../shared/Models/http';
 import { url } from '../shared/constants';
 import { map } from 'rxjs';
 import { Restaurant } from '../shared/Models/restaurant';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Restaurant } from '../shared/Models/restaurant';
 export class RestaurantService {
   private restaurantsUrl = url.restaurantsUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   newRestaurant(restaurant: Restaurant) {
     let body = { selectedRestaurant: restaurant };
@@ -34,5 +35,18 @@ export class RestaurantService {
         }
       })
     );
+  }
+
+  getRestaurant(id: string) {
+    let currentId = id;
+    return this.http
+      .get<HttpResponse>(`http://localhost:8080/restaurants/${currentId}`)
+      .pipe(
+        map((response) => {
+          if (response.isSuccess) {
+            return response.payLoad;
+          }
+        })
+      );
   }
 }
