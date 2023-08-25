@@ -15,7 +15,8 @@ export class RestaurantComponent {
     private restaurantService: RestaurantService,
     private route: ActivatedRoute
   ) {
-    let currentId = this.route.snapshot.params['id'];
+    let currentId = '';
+    this.route.params.subscribe(params => {currentId = params['id']});
 
     this.restaurantService.getRestaurant(currentId).subscribe((payLoad) => {
       this.restaurant = payLoad;
