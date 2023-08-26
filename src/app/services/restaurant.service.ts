@@ -4,7 +4,6 @@ import { HttpResponse } from '../shared/Models/http';
 import { url } from '../shared/constants';
 import { map } from 'rxjs';
 import { Restaurant } from '../shared/Models/restaurant';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 export class RestaurantService {
   private restaurantsUrl = url.restaurantsUrl;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient) {}
 
   newRestaurant(restaurant: Restaurant) {
     let body = { selectedRestaurant: restaurant };
