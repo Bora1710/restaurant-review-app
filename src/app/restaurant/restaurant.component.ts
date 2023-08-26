@@ -1,25 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant } from '../shared/Models/restaurant';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.css'],
 })
-export class RestaurantComponent {
+export class RestaurantComponent implements OnDestroy {
   restaurant: Restaurant = { name: '', description: '' };
+  destroy$ = new Subject<void>();
 
   constructor(
     private restaurantService: RestaurantService,
     private route: ActivatedRoute
   ) {
-    let currentId = '';
-    this.route.params.subscribe(params => {currentId = params['id']});
-
-    this.restaurantService.getRestaurant(currentId).subscribe((payLoad) => {
-      this.restaurant = payLoad;
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
+      this.restaurantService
+        .getRestaurant(params['id'])
+        .subscribe((payLoad) => {
+          this.restaurant = payLoad;
+        });
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
