@@ -10,3 +10,11 @@
   font-size: 16px;
   color: #333;
 }
+
+app-star-icon {
+  cursor: pointer;
+}
+
+.active {
+  color: gold;
+}

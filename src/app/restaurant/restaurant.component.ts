@@ -12,6 +12,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class RestaurantComponent implements OnDestroy {
   restaurant: Restaurant = { name: '', description: '' };
   destroy$ = new Subject<void>();
+  stars = [1, 2, 3, 4, 5];
+  rating = 0;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -29,5 +31,9 @@ export class RestaurantComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  updateRating(star: number) {
+    this.rating = star;
   }
 }

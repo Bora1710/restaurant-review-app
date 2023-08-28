@@ -4,15 +4,14 @@
   <p>Description: {{ restaurant.description }}</p>
 
   <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
-<form>
-  <label for="review">Add review:</label>
-  <div>
-    <app-star-icon></app-star-icon>
-    <app-star-icon></app-star-icon>
-    <app-star-icon></app-star-icon>
-    <app-star-icon></app-star-icon>
-    <app-star-icon></app-star-icon>
-  </div>
-  <textarea name="comment" id="comment" cols="30" rows="10"></textarea>  
-</form>
+  <form>
+    <label for="review">Add review:</label>
+    <ng-container *ngFor="let star of stars">
+      <app-star-icon
+        (click)="updateRating(star)"
+        [ngClass]="{ active: star <= rating }"
+      ></app-star-icon>
+    </ng-container>
+    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+  </form>
 </div>
