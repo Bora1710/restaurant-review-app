@@ -12,14 +12,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RestaurantComponent implements OnDestroy {
   reviewForm = new FormGroup({
-    rating: new FormControl(0, Validators.required),
+    rating: new FormControl<number>(0, Validators.required),
     dateOfVisit: new FormControl('', Validators.required),
     comment: new FormControl('', Validators.required),
   });
-  restaurant: Restaurant = { name: '', description: '' };
+  restaurant: Restaurant = { name: '', description: '', reviews: [] };
   destroy$ = new Subject<void>();
   stars = [1, 2, 3, 4, 5];
-  rating = 0;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -40,8 +39,17 @@ export class RestaurantComponent implements OnDestroy {
   }
 
   updateRating(star: number) {
-    this.rating = star;
+    this.reviewForm.controls.rating.setValue(star);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    if (this.reviewForm.valid) {
+      let reviews = this.restaurant.reviews || [];
+      let newReview = this.reviewForm.value as Review;
+      this.restaurant.reviews = [...reviews, newReview];
+      this.restaurantService
+        .updateRestaurant(this.restaurant)
+        .subscribe((payLoad) => {});
+    }
+  }
 }

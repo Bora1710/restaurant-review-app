@@ -3,7 +3,7 @@ export interface Restaurant {
   name: string;
   description: string;
   dateOfCreation?: Date;
-  reviews?: Review[];
+  reviews: Review[];
   averageRating?: number;
 }
 
