@@ -7,9 +7,9 @@
   <form [formGroup]="reviewForm">
     <label for="review">Add review:</label>
     <ng-container *ngFor="let star of stars">
-      <app-star-icon formControlName="rating"
+      <app-star-icon
         (click)="updateRating(star)"
-        [ngClass]="{ active: star <= rating }"
+        [ngClass]="{ active: star <= reviewForm.value.rating! }"
       ></app-star-icon>
     </ng-container>
     <div>
