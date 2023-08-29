@@ -8,9 +8,9 @@ export interface Restaurant {
 }
 
 export interface Review {
-  id: string;
-  rating: number;
-  dateOfVisit: Date;
+  id?: string;
+  rating?: number;
+  dateOfVisit?: Date;
   comment: string;
-  commentedByUserId: string;
+  commentedByUserId?: string;
 }
