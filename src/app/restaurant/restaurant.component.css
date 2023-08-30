@@ -1,4 +1,4 @@
-.restaurant {
+.restaurant, .container, .singleReview {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
@@ -17,18 +17,4 @@ app-star-icon {
 
 .active {
   color: gold;
-}
-
-.container {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  background-color: #f9f9f9;
-}
-
-.singleReview {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  background-color: #f9f9f9;
 }
