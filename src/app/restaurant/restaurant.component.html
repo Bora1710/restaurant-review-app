@@ -40,12 +40,10 @@
 <section class="container">
   <ng-container *ngFor="let review of restaurant.reviews">
     <div class="singleReview">
-      <div>
-        <app-star-icon
-          *ngFor="let star of stars"
-          [ngClass]="{ active: star <= review.rating! }"
-        ></app-star-icon>
-      </div>
+      <app-star-icon
+        *ngFor="let star of stars"
+        [ngClass]="{ active: star <= review.rating! }"
+      ></app-star-icon>
       <h3>Comment:</h3>
       <p>{{ review.comment }}</p>
       <h3>Date of visit: {{ review.dateOfVisit }}</h3>
