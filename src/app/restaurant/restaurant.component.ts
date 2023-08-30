@@ -19,11 +19,14 @@ export class RestaurantComponent implements OnDestroy {
   restaurant: Restaurant = { name: '', description: '', reviews: [] };
   destroy$ = new Subject<void>();
   stars = [1, 2, 3, 4, 5];
+  maxDate: string;
 
   constructor(
     private restaurantService: RestaurantService,
     private route: ActivatedRoute
   ) {
+    let maxDate = new Date();
+    this.maxDate = maxDate.toISOString().split('T')[0];
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.restaurantService
         .getRestaurant(params['id'])
