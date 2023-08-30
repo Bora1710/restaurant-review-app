@@ -5,7 +5,7 @@
 
   <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
   <form [formGroup]="reviewForm">
-    <label for="review">Add review:</label>
+    <label>Add review:</label>
     <ng-container *ngFor="let star of stars">
       <app-star-icon
         (click)="updateRating(star)"
@@ -14,7 +14,12 @@
     </ng-container>
     <div>
       <label for="dateOfVisit">Date of visit:</label>
-      <input type="date" [max]="maxDate" formControlName="dateOfVisit" />
+      <input
+        type="date"
+        id="dateOfVisit"
+        [max]="maxDate"
+        formControlName="dateOfVisit"
+      />
     </div>
     <div>
       <label for="comment">Add a comment:</label>
