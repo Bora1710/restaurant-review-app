@@ -50,7 +50,7 @@ export class RestaurantComponent implements OnDestroy {
       let newReview = this.reviewForm.value as Review;
       this.restaurant.reviews = [...reviews, newReview];
       this.restaurantService
-        .updateRestaurant(this.restaurant)
+        .updateRestaurant(this.restaurant).pipe(takeUntil(this.destroy$))
         .subscribe((payLoad) => {});
     }
   }
