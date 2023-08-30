@@ -48,4 +48,17 @@ export class RestaurantService {
         })
       );
   }
+
+  updateRestaurant(restaurant: Restaurant) {
+    let body = { selectedRestaurant: restaurant };
+    return this.http
+      .post<HttpResponse>(`${this.restaurantsUrl}/${restaurant.id}`, body)
+      .pipe(
+        map((response) => {
+          if (response.isSuccess) {
+            return response.payLoad;
+          }
+        })
+      );
+  }
 }

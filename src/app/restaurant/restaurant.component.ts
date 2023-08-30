@@ -1,8 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
-import { Restaurant } from '../shared/Models/restaurant';
+import { Restaurant, Review } from '../shared/Models/restaurant';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-restaurant',
@@ -10,13 +11,21 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./restaurant.component.css'],
 })
 export class RestaurantComponent implements OnDestroy {
-  restaurant: Restaurant = { name: '', description: '' };
+  reviewForm = new FormGroup({
+    rating: new FormControl<number>(0, Validators.required),
+    dateOfVisit: new FormControl('', Validators.required),
+    comment: new FormControl('', Validators.required),
+  });
+  restaurant: Restaurant = { name: '', description: '', reviews: [] };
   destroy$ = new Subject<void>();
+  stars = [1, 2, 3, 4, 5];
+  maxDate: string;
 
   constructor(
     private restaurantService: RestaurantService,
     private route: ActivatedRoute
   ) {
+    this.maxDate = new Date().toISOString().split('T')[0];
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.restaurantService
         .getRestaurant(params['id'])
@@ -29,5 +38,21 @@ export class RestaurantComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  updateRating(star: number) {
+    this.reviewForm.controls.rating.setValue(star);
+  }
+
+  onSubmit() {
+    if (this.reviewForm.valid) {
+      let reviews = this.restaurant.reviews || [];
+      let newReview = this.reviewForm.value as Review;
+      this.restaurant.reviews = [...reviews, newReview];
+      this.restaurantService
+        .updateRestaurant(this.restaurant)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((payLoad) => {});
+    }
   }
 }
