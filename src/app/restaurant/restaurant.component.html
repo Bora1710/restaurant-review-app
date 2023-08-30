@@ -14,12 +14,36 @@
     </ng-container>
     <div>
       <label for="dateOfVisit">Date of visit:</label>
-      <input type="date" formControlName="dateOfVisit">
+      <input type="date" [max]="maxDate" formControlName="dateOfVisit" />
     </div>
     <div>
-    <label for="comment">Add a comment:</label>
-    <textarea name="comment" id="comment" cols="30" rows="10" formControlName="comment"></textarea>
+      <label for="comment">Add a comment:</label>
+      <textarea
+        name="comment"
+        id="comment"
+        cols="30"
+        rows="10"
+        formControlName="comment"
+      ></textarea>
     </div>
-    <button [disabled]="reviewForm.invalid"  (click)="onSubmit()">Add review</button>
+    <button [disabled]="reviewForm.invalid" (click)="onSubmit()">
+      Add review
+    </button>
   </form>
 </div>
+
+<section class="container">
+  <ng-container *ngFor="let review of restaurant.reviews">
+    <div class="singleReview">
+      <div>
+        <app-star-icon
+          *ngFor="let star of stars"
+          [ngClass]="{ active: star <= review.rating! }"
+        ></app-star-icon>
+      </div>
+      <h3>comment:</h3>
+      <p>{{ review.comment }}</p>
+      <h3>date of visit: {{ review.dateOfVisit }}</h3>
+    </div>
+  </ng-container>
+</section>
