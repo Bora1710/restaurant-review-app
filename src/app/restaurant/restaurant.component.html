@@ -4,6 +4,9 @@
   <p>Description: {{ restaurant.description }}</p>
 
   <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
+
+  <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
+
   <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
     <label>Add review:</label>
     <ng-container *ngFor="let star of stars">
@@ -31,9 +34,7 @@
         formControlName="comment"
       ></textarea>
     </div>
-    <button type="submit" [disabled]="reviewForm.invalid">
-      Add review
-    </button>
+    <button type="submit" [disabled]="reviewForm.invalid">Add review</button>
   </form>
 </div>
 

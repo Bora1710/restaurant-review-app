@@ -30,7 +30,9 @@ export class RestaurantService {
     return this.http.get<HttpResponse>(`${this.restaurantsUrl}`).pipe(
       map((response) => {
         if (response.isSuccess) {
-          return response.payLoad;
+          return response.payLoad.map((restaurant: Restaurant) => {
+            return new Restaurant(restaurant);
+          });
         }
       })
     );
@@ -39,11 +41,14 @@ export class RestaurantService {
   getRestaurant(id: string) {
     let currentId = id;
     return this.http
-      .get<HttpResponse>(`http://localhost:8080/restaurants/${currentId}`)
+      .get<HttpResponse>(`${this.restaurantsUrl}/${currentId}`)
       .pipe(
         map((response) => {
           if (response.isSuccess) {
-            return response.payLoad;
+            return new Restaurant(response.payLoad);
+          }
+          else {
+            return new Restaurant();
           }
         })
       );

@@ -16,7 +16,7 @@ export class RestaurantComponent implements OnDestroy {
     dateOfVisit: new FormControl('', Validators.required),
     comment: new FormControl('', Validators.required),
   });
-  restaurant: Restaurant = { name: '', description: '', reviews: [] };
+  restaurant: Restaurant = new Restaurant();
   destroy$ = new Subject<void>();
   stars = [1, 2, 3, 4, 5];
   maxDate: string;
@@ -52,7 +52,9 @@ export class RestaurantComponent implements OnDestroy {
       this.restaurantService
         .updateRestaurant(this.restaurant)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((payLoad) => {});
+        .subscribe((payLoad) => {
+          this.restaurant.averageRating = this.restaurant.calculateAverageRating(this.restaurant.reviews as Review[])
+        });
     }
   }
 }
