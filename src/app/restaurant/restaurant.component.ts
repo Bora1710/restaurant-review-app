@@ -53,10 +53,7 @@ export class RestaurantComponent implements OnDestroy {
         .updateRestaurant(this.restaurant)
         .pipe(takeUntil(this.destroy$))
         .subscribe((payLoad) => {
-          this.restaurant.averageRating =
-            this.restaurant.calculateAverageRating(
-              this.restaurant.reviews as Review[]
-            );
+          this.restaurant.calculateAverageRating();
         });
     }
   }

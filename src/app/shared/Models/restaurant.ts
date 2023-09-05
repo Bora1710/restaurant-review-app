@@ -3,7 +3,7 @@ export class Restaurant {
   name?: string;
   description?: string;
   dateOfCreation?: Date;
-  reviews?: Review[];
+  reviews: Review[] = [];
   averageRating?: number;
 
   constructor(obj?: Partial<Restaurant>) {
@@ -17,15 +17,16 @@ export class Restaurant {
       this.reviews = [];
       this.averageRating = 0;
     }
+
+    this.calculateAverageRating();
   }
 
-  calculateAverageRating(reviews: Review[]) {
-    let sum = reviews.reduce((sum, review) => {
+  calculateAverageRating() {
+    let sum = this.reviews.reduce((sum, review) => {
       return sum + review.rating;
     }, 0);
-    let average = sum / reviews.length || 0;
-    average = Math.round(average * 2) / 2;
-    return average;
+    this.averageRating = sum / this.reviews.length || 0;
+    this.averageRating = Math.round(this.averageRating * 2) / 2;
   }
 }
 
