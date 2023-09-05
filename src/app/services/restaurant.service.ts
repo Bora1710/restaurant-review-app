@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '../shared/Models/http';
 import { url } from '../shared/constants';
@@ -46,8 +46,7 @@ export class RestaurantService {
         map((response) => {
           if (response.isSuccess) {
             return new Restaurant(response.payLoad);
-          }
-          else {
+          } else {
             return new Restaurant();
           }
         })
