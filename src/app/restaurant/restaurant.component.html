@@ -7,6 +7,12 @@
 
   <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
 
+  <ng-container *ngFor="let star of stars">
+    <app-star-icon
+      [ngClass]="{ active: star <= restaurant.averageRating! }"
+    ></app-star-icon>
+  </ng-container>
+
   <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
     <label>Add review:</label>
     <ng-container *ngFor="let star of stars">
