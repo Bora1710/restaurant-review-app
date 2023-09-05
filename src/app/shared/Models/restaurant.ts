@@ -23,7 +23,9 @@ export class Restaurant {
     let sum = reviews.reduce((sum, review) => {
       return sum + review.rating;
     }, 0);
-    return sum / reviews.length || 0;
+    let average = sum / reviews.length || 0;
+    average = Math.round(average * 2) / 2;
+    return average;
   }
 }
 
