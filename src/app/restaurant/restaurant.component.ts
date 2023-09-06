@@ -4,6 +4,7 @@ import { Restaurant, Review } from '../shared/Models/restaurant';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-restaurant',
@@ -23,7 +24,8 @@ export class RestaurantComponent implements OnDestroy {
 
   constructor(
     private restaurantService: RestaurantService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthenticationService
   ) {
     this.maxDate = new Date().toISOString().split('T')[0];
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
@@ -48,6 +50,7 @@ export class RestaurantComponent implements OnDestroy {
     if (this.reviewForm.valid) {
       let reviews = this.restaurant.reviews || [];
       let newReview = this.reviewForm.value as Review;
+      newReview.commentedByUserId = this.authService.userInfo.userName;
       this.restaurant.reviews = [...reviews, newReview];
       this.restaurantService
         .updateRestaurant(this.restaurant)

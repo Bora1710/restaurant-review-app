@@ -51,6 +51,7 @@
         *ngFor="let star of stars"
         [ngClass]="{ active: star <= review.rating! }"
       ></app-star-icon>
+      <h3>{{ review.commentedByUserId }}</h3>
       <h3>Comment:</h3>
       <p>{{ review.comment }}</p>
       <h3>Date of visit: {{ review.dateOfVisit }}</h3>

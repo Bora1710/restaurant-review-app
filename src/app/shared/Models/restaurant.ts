@@ -35,5 +35,5 @@ export interface Review {
   rating: number;
   dateOfVisit?: Date;
   comment: string;
-  commentedByUserId?: string;
+  commentedByUserId: string;
 }
