@@ -1,3 +1,5 @@
+<h1>Hello {{userName}}</h1>
+
 <section *ngFor="let restaurant of restaurantList">
   <div [routerLink]="['/restaurants', restaurant.id]" class="restaurant">
     <p>Name: {{ restaurant.name }}</p>

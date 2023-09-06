@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant } from '../shared/Models/restaurant';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-restaurantlist',
@@ -10,7 +11,11 @@ import { Restaurant } from '../shared/Models/restaurant';
 export class RestaurantlistComponent {
   restaurantList: Restaurant[] = [];
   stars = [1, 2, 3, 4, 5];
-  constructor(private restaurantService: RestaurantService) {
+  userName = this.authService.userInfo?.userName;
+  constructor(
+    private restaurantService: RestaurantService,
+    private authService: AuthenticationService
+  ) {
     this.restaurantService.getRestaurants().subscribe((payLoad) => {
       this.restaurantList = payLoad;
     });
