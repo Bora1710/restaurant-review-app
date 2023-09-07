@@ -43,7 +43,10 @@ export class AuthenticationService {
     return this.http.get<HttpResponse>(`${this.userUrl}/token/${id}`).pipe(
       map((response) => {
         if (response.isSuccess) {
-          this.userInfo = response.payLoad;
+          this.userInfo.userName = response.payLoad.userName;
+          this.userInfo.id = response.payLoad.id;
+          this.userInfo.password = response.payLoad.password;
+          this.userInfo.role = response.payLoad.role;
           return response.payLoad;
         }
       })

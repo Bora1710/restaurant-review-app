@@ -11,7 +11,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class RestaurantlistComponent {
   restaurantList: Restaurant[] = [];
   stars = [1, 2, 3, 4, 5];
-  userName = this.authService.userInfo?.userName;
+  userInfo = this.authService.userInfo;
+
   constructor(
     private restaurantService: RestaurantService,
     private authService: AuthenticationService
@@ -20,4 +21,5 @@ export class RestaurantlistComponent {
       this.restaurantList = payLoad;
     });
   }
+
 }
