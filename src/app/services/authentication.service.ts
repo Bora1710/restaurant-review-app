@@ -47,7 +47,6 @@ export class AuthenticationService {
           this.userInfo.id = response.payLoad.id;
           this.userInfo.password = response.payLoad.password;
           this.userInfo.role = response.payLoad.role;
-          return response.payLoad;
         }
       })
     );
