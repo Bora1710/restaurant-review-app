@@ -50,7 +50,7 @@ export class RestaurantComponent implements OnDestroy {
     if (this.reviewForm.valid) {
       let reviews = this.restaurant.reviews || [];
       let newReview = this.reviewForm.value as Review;
-      newReview.commentedByUserId = this.authService.userInfo.userName;
+      newReview.commentedByUserId = this.authService.userInfo.userName; //user id a ne username  (taj name cemo citati iz usera a ne iz id-a ovde mora id)
       this.restaurant.reviews = [...reviews, newReview];
       this.restaurantService
         .updateRestaurant(this.restaurant)

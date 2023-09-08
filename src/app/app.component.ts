@@ -14,12 +14,7 @@ export class AppComponent {
     private router: Router
   ) {
     if (localStorage.getItem('token')) {
-      this.authService
-        .userInfoFromToken(localStorage.getItem('token')!)
-        .subscribe();
-    } else {
-      alert('You have to login first!');
-      this.router.navigate(['']);
+      this.router.navigate(['/restaurants']);
     }
   }
 }
