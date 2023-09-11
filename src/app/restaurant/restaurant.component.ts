@@ -33,6 +33,9 @@ export class RestaurantComponent implements OnDestroy {
         .getRestaurant(params['id'])
         .subscribe((payLoad) => {
           this.restaurant = payLoad;
+          if (payLoad) {
+            this.restaurant.reviews = this.getUserPerReview(payLoad);
+          }
         });
     });
   }
@@ -50,7 +53,8 @@ export class RestaurantComponent implements OnDestroy {
     if (this.reviewForm.valid) {
       let reviews = this.restaurant.reviews || [];
       let newReview = this.reviewForm.value as Review;
-      newReview.commentedByUserId = this.authService.userInfo.userName; //user id a ne username  (taj name cemo citati iz usera a ne iz id-a ovde mora id)
+      newReview.commentedByUserId = this.authService.userInfo.id;
+      newReview.commentedByUserName = this.authService.userInfo.userName;
       this.restaurant.reviews = [...reviews, newReview];
       this.restaurantService
         .updateRestaurant(this.restaurant)
@@ -59,5 +63,25 @@ export class RestaurantComponent implements OnDestroy {
           this.restaurant.calculateAverageRating();
         });
     }
+  }
+
+  getUserPerReview(restaurant: Restaurant) {
+    let reviews: Review[] = [];
+    for (let review of restaurant.reviews) {
+      if (review.commentedByUserId) {
+        this.authService
+          .getUser(review.commentedByUserId)
+          .subscribe((payLoad) => {
+            if (payLoad) {
+              review.commentedByUserName = payLoad.userName;
+              reviews.push(review);
+            }
+          });
+      } else {
+        review.commentedByUserName = 'Unknown';
+        reviews.push(review);
+      }
+    }
+    return reviews;
   }
 }
