@@ -36,4 +36,7 @@ export interface Review {
   dateOfVisit?: Date;
   comment: string;
   commentedByUserId: string;
+
+  //attribute only for FE
+  commentedByUserName: string;
 }

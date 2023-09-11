@@ -51,4 +51,14 @@ export class AuthenticationService {
       })
     );
   }
+
+  getUser(id: string) {
+    return this.http.get<HttpResponse>(`${this.userUrl}/${id}`).pipe(
+      map((response) => {
+        if (response.isSuccess) {
+          return response.payLoad;
+        }
+      })
+    );
+  }
 }
