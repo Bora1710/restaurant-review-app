@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class RestaurantlistComponent {
   restaurantList: Restaurant[] = [];
-  stars = [1, 2, 3, 4, 5];
   userInfo = this.authService.userInfo;
 
   constructor(
