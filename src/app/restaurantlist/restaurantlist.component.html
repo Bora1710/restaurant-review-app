@@ -1,3 +1,6 @@
+<h1>Hello {{ userInfo.userName }}</h1>
+<button type="button" (click)="logout()">Logout</button>
+
 <section *ngFor="let restaurant of restaurantList">
   <div [routerLink]="['/restaurants', restaurant.id]" class="restaurant">
     <p>Name: {{ restaurant.name }}</p>
