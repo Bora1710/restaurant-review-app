@@ -11,10 +11,10 @@ import { NewrestaurantComponent } from './newrestaurant/newrestaurant.component'
 import { RestaurantlistComponent } from './restaurantlist/restaurantlist.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { StarIconComponent } from './shared/star-icon/star-icon.component';
-import { RestaurantcardComponent } from './restaurantcard/restaurantcard.component';
+import { RestaurantCardComponent } from './restaurant-card/restaurant-card.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent, RestaurantComponent, StarIconComponent, RestaurantcardComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent, RestaurantComponent, StarIconComponent, RestaurantCardComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,10 +3,10 @@ import { Restaurant } from '../shared/Models/restaurant';
 
 @Component({
   selector: 'app-restaurantcard',
-  templateUrl: './restaurantcard.component.html',
-  styleUrls: ['./restaurantcard.component.css'],
+  templateUrl: './restaurant-card.component.html',
+  styleUrls: ['./restaurant-card.component.css'],
 })
-export class RestaurantcardComponent {
+export class RestaurantCardComponent {
   @Input() restaurant: Restaurant = new Restaurant();
 
   stars = [1, 2, 3, 4, 5];
