@@ -1,22 +1,12 @@
 <h1>Hello {{ userInfo.userName }}</h1>
+
 <button type="button" (click)="logout()">Logout</button>
 
 <section *ngFor="let restaurant of restaurantList">
-  <div [routerLink]="['/restaurants', restaurant.id]" class="restaurant">
-    <p>Name: {{ restaurant.name }}</p>
-
-    <p>Description: {{ restaurant.description }}</p>
-
-    <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
-
-    <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
-
-    <ng-container *ngFor="let star of stars">
-      <app-star-icon
-        [ngClass]="{ active: star <= restaurant.averageRating! }"
-      ></app-star-icon>
-    </ng-container>
-  </div>
+  <app-restaurantcard
+    [routerLink]="['/restaurants', restaurant.id]"
+    [restaurant]="restaurant"
+  ></app-restaurantcard>
 </section>
 
 <button type="button" routerLink="/restaurants/new">Add new restaurant</button>
