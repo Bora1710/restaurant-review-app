@@ -4,6 +4,7 @@ import { Restaurant, Review } from '../shared/Models/restaurant';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-restaurant',
@@ -36,6 +37,23 @@ export class RestaurantComponent implements OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  onSubmit(reviewForm: FormGroup) {
+    debugger;
+    if (reviewForm.valid) {
+      let reviews = this.restaurant.reviews || [];
+      let newReview = reviewForm.value as Review;
+      newReview.commentedByUserId = this.authService.userInfo.id;
+      newReview.commentedByUserName = this.authService.userInfo.userName;
+      this.restaurant.reviews = [...reviews, newReview];
+      this.restaurantService
+        .updateRestaurant(this.restaurant)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((payLoad) => {
+          this.restaurant.calculateAverageRating();
+        });
+    }
   }
 
   getUserPerReview(restaurant: Restaurant) {

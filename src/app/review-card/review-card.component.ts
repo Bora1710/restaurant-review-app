@@ -1,17 +1,15 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
-import { Restaurant, Review } from '../shared/Models/restaurant';
-import { AuthenticationService } from '../services/authentication.service';
-import { RestaurantService } from '../services/restaurant.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Restaurant } from '../shared/Models/restaurant';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-review-card',
   templateUrl: './review-card.component.html',
   styleUrls: ['./review-card.component.css'],
 })
-export class ReviewCardComponent implements OnDestroy {
+export class ReviewCardComponent {
   @Input() restaurant: Restaurant = new Restaurant();
+  @Output() submitForm = new EventEmitter<FormGroup>();
 
   reviewForm = new FormGroup({
     rating: new FormControl<number>(0, Validators.required),
@@ -21,18 +19,9 @@ export class ReviewCardComponent implements OnDestroy {
 
   maxDate: string;
   stars = [1, 2, 3, 4, 5];
-  destroy$ = new Subject<void>();
 
-  constructor(
-    private authService: AuthenticationService,
-    private restaurantService: RestaurantService
-  ) {
+  constructor() {
     this.maxDate = new Date().toISOString().split('T')[0];
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   updateRating(star: number) {
@@ -40,19 +29,6 @@ export class ReviewCardComponent implements OnDestroy {
   }
 
   onSubmit() {
-    debugger;
-    if (this.reviewForm.valid) {
-      let reviews = this.restaurant.reviews || [];
-      let newReview = this.reviewForm.value as Review;
-      newReview.commentedByUserId = this.authService.userInfo.id;
-      newReview.commentedByUserName = this.authService.userInfo.userName;
-      this.restaurant.reviews = [...reviews, newReview];
-      this.restaurantService
-        .updateRestaurant(this.restaurant)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((payLoad) => {
-          this.restaurant.calculateAverageRating();
-        });
-    }
+    this.submitForm.emit(this.reviewForm);
   }
 }
