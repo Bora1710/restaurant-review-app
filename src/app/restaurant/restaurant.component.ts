@@ -39,7 +39,6 @@ export class RestaurantComponent implements OnDestroy {
   }
 
   onSubmit(reviewForm: FormGroup) {
-    debugger;
     if (reviewForm.valid) {
       let reviews = this.restaurant.reviews || [];
       let newReview = reviewForm.value as Review;
