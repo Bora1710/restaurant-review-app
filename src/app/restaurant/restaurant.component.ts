@@ -21,7 +21,6 @@ export class RestaurantComponent implements OnDestroy {
     private route: ActivatedRoute,
     private authService: AuthenticationService
   ) {
-    debugger;
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.restaurantService
         .getRestaurant(params['id'])
