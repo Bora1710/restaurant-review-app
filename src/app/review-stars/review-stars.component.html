@@ -1,1 +1,5 @@
-<p>review-stars works!</p>
+<ng-container *ngFor="let star of stars">
+  <app-star-icon
+    [ngClass]="{ active: star <= restaurant.averageRating! }"
+  ></app-star-icon>
+</ng-container>
