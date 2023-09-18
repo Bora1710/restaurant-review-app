@@ -1,0 +1,46 @@
+<div class="container">
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <label>Add review:</label>
+    <ng-container *ngFor="let star of stars">
+      <app-star-icon
+        (click)="updateRating(star)"
+        [ngClass]="{ active: star <= reviewForm.value.rating! }"
+      ></app-star-icon>
+    </ng-container>
+    <div>
+      <label for="dateOfVisit">Date of visit:</label>
+      <input
+        type="date"
+        id="dateOfVisit"
+        [max]="maxDate"
+        formControlName="dateOfVisit"
+      />
+    </div>
+    <div>
+      <label for="comment">Add a comment:</label>
+      <textarea
+        name="comment"
+        id="comment"
+        cols="30"
+        rows="10"
+        formControlName="comment"
+      ></textarea>
+    </div>
+    <button type="submit" [disabled]="reviewForm.invalid">Add review</button>
+  </form>
+</div>
+
+<section class="container">
+  <ng-container *ngFor="let review of restaurant.reviews">
+    <div class="review">
+      <app-star-icon
+        *ngFor="let star of stars"
+        [ngClass]="{ active: star <= review.rating! }"
+      ></app-star-icon>
+      <h3>User: {{ review.commentedByUserName }}</h3>
+      <h3>Comment:</h3>
+      <p>{{ review.comment }}</p>
+      <h3>Date of visit: {{ review.dateOfVisit }}</h3>
+    </div>
+  </ng-container>
+</section>
