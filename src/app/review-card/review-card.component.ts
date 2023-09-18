@@ -29,6 +29,8 @@ export class ReviewCardComponent {
   }
 
   onSubmit() {
-    this.submitForm.emit(this.reviewForm);
+    if (this.reviewForm.valid) {
+      this.submitForm.emit(this.reviewForm);
+    }
   }
 }

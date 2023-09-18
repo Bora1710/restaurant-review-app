@@ -39,19 +39,17 @@ export class RestaurantComponent implements OnDestroy {
   }
 
   onSubmit(reviewForm: FormGroup) {
-    if (reviewForm.valid) {
-      let reviews = this.restaurant.reviews || [];
-      let newReview = reviewForm.value as Review;
-      newReview.commentedByUserId = this.authService.userInfo.id;
-      newReview.commentedByUserName = this.authService.userInfo.userName;
-      this.restaurant.reviews = [...reviews, newReview];
-      this.restaurantService
-        .updateRestaurant(this.restaurant)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((payLoad) => {
-          this.restaurant.calculateAverageRating();
-        });
-    }
+    let reviews = this.restaurant.reviews || [];
+    let newReview = reviewForm.value as Review;
+    newReview.commentedByUserId = this.authService.userInfo.id;
+    newReview.commentedByUserName = this.authService.userInfo.userName;
+    this.restaurant.reviews = [...reviews, newReview];
+    this.restaurantService
+      .updateRestaurant(this.restaurant)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((payLoad) => {
+        this.restaurant.calculateAverageRating();
+      });
   }
 
   getUserPerReview(restaurant: Restaurant) {
