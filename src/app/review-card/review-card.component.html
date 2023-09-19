@@ -1,12 +1,10 @@
 <div class="container">
   <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
     <label>Add review:</label>
-    <ng-container *ngFor="let star of stars">
-      <app-star-icon
-        (click)="updateRating(star)"
-        [ngClass]="{ active: star <= reviewForm.value.rating! }"
-      ></app-star-icon>
-    </ng-container>
+    <app-review-stars
+      [rating]="reviewForm.value.rating!"
+      (onClick)="updateRating($event)"
+    ></app-review-stars>
     <div>
       <label for="dateOfVisit">Date of visit:</label>
       <input
@@ -33,10 +31,7 @@
 <section class="container">
   <ng-container *ngFor="let review of restaurant.reviews">
     <div class="review">
-      <app-star-icon
-        *ngFor="let star of stars"
-        [ngClass]="{ active: star <= review.rating! }"
-      ></app-star-icon>
+      <app-review-stars [rating]="review.rating"></app-review-stars>
       <h3>User: {{ review.commentedByUserName }}</h3>
       <h3>Comment:</h3>
       <p>{{ review.comment }}</p>

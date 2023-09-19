@@ -7,9 +7,5 @@
 
   <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
 
-  <ng-container *ngFor="let star of stars">
-    <app-star-icon
-      [ngClass]="{ active: star <= restaurant.averageRating! }"
-    ></app-star-icon>
-  </ng-container>
+  <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
 </div>

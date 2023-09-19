@@ -18,7 +18,6 @@ export class ReviewCardComponent {
   });
 
   maxDate: string;
-  stars = [1, 2, 3, 4, 5];
 
   constructor() {
     this.maxDate = new Date().toISOString().split('T')[0];
