@@ -25,8 +25,7 @@ export class ReviewStarsComponent {
     if (this.restaurant.averageRating) {
       const nonFilledCount = 5 - Math.ceil(this.restaurant.averageRating || 5);
       return Array(nonFilledCount).fill(0);
-    }
-    else {
+    } else {
       return Array(5).fill(0);
     }
   }
