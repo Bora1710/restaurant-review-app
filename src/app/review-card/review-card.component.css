@@ -5,11 +5,3 @@
   margin: 10px;
   background-color: #f9f9f9;
 }
-
-app-star-icon {
-  cursor: pointer;
-}
-
-.active {
-  color: gold;
-}
