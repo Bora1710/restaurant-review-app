@@ -4,7 +4,7 @@ export class Restaurant {
   description?: string;
   dateOfCreation?: Date;
   reviews: Review[] = [];
-  averageRating?: number;
+  averageRating = 0;
 
   constructor(obj?: Partial<Restaurant>) {
     if (obj) {

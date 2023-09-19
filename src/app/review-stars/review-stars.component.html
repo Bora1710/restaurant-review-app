@@ -1,7 +1,13 @@
 <div class="rating">
-  <app-full-star *ngFor="let fullStar of getFullStars()"></app-full-star>
-  <app-half-star *ngIf="hasHalfStar()"></app-half-star>
-  <app-star-icon
-    *ngFor="let nonFilledStar of getNonFilledStars()"
-  ></app-star-icon>
+  <ng-container *ngFor="let star of stars">
+    <app-full-star
+      *ngIf="star <= rating"
+      (click)="handleClick(star)"
+    ></app-full-star>
+    <app-half-star *ngIf="rating < star && rating > star - 1"></app-half-star>
+    <app-star-icon
+      *ngIf="star > rating && star - rating >= 1"
+      (click)="handleClick(star)"
+    ></app-star-icon>
+  </ng-container>
 </div>

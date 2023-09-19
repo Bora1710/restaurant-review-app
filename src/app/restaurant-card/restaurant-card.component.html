@@ -7,5 +7,5 @@
 
   <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
 
-  <app-review-stars [restaurant]="restaurant"></app-review-stars>
+  <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
 </div>
