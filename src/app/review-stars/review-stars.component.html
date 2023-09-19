@@ -1,5 +1,13 @@
-<ng-container *ngFor="let star of stars">
+<div class="rating">
+    <app-full-star *ngFor="let fullStar of getFullStars()"></app-full-star>
+    <app-half-star *ngIf="hasHalfStar()"></app-half-star>
+    <app-star-icon *ngFor="let nonFilledStar of getNonFilledStars()"></app-star-icon>
+  </div>
+
+<!-- <ng-container *ngFor="let star of stars">
+    
   <app-star-icon
     [ngClass]="{ active: star <= restaurant.averageRating! }"
   ></app-star-icon>
-</ng-container>
+
+</ng-container> -->
