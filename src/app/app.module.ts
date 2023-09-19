@@ -14,9 +14,10 @@ import { StarIconComponent } from './shared/star-icon/star-icon.component';
 import { RestaurantCardComponent } from './restaurant-card/restaurant-card.component';
 import { ReviewCardComponent } from './review-card/review-card.component';
 import { ReviewStarsComponent } from './review-stars/review-stars.component';
+import { HalfStarComponent } from './shared/half-star/half-star.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent, RestaurantComponent, StarIconComponent, RestaurantCardComponent, ReviewCardComponent, ReviewStarsComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, NewrestaurantComponent, RestaurantlistComponent, RestaurantComponent, StarIconComponent, RestaurantCardComponent, ReviewCardComponent, ReviewStarsComponent, HalfStarComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
