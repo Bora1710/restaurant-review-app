@@ -10,7 +10,7 @@
   <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
 
   <app-trash-icon
-    *ngIf="trashCanDisplay"
+    *ngIf="trashCanDisplay && userInfo.role === 1"
     (click)="handleClick()"
   ></app-trash-icon>
 </div>
