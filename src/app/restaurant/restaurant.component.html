@@ -1,2 +1,8 @@
-<app-restaurantcard [restaurant]="restaurant"></app-restaurantcard>
-<app-review-card [restaurant]="restaurant" (submitForm)="onSubmit($event)"></app-review-card>
+<app-restaurantcard
+  (onClick)="deleteRestaurant()"
+  [restaurant]="restaurant"
+></app-restaurantcard>
+<app-review-card
+  [restaurant]="restaurant"
+  (submitForm)="onSubmit($event)"
+></app-review-card>

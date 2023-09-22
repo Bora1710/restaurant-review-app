@@ -8,4 +8,6 @@
   <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
 
   <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
+
+  <app-trash-icon (click)="handleClick()"></app-trash-icon>
 </div>

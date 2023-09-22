@@ -65,4 +65,17 @@ export class RestaurantService {
         })
       );
   }
+
+  deleteRestaurant(id: string) {
+    let currentId = id;
+    return this.http
+      .delete<HttpResponse>(`${this.restaurantsUrl}/${currentId}`)
+      .pipe(
+        map((response) => {
+          if (response.isSuccess) {
+            return response.payLoad;
+          }
+        })
+      );
+  }
 }

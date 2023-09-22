@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Restaurant } from '../shared/Models/restaurant';
 
 @Component({
@@ -8,6 +8,9 @@ import { Restaurant } from '../shared/Models/restaurant';
 })
 export class RestaurantCardComponent {
   @Input() restaurant: Restaurant = new Restaurant();
+  @Output() onClick = new EventEmitter();
 
-  stars = [1, 2, 3, 4, 5];
+  handleClick() {
+    this.onClick.emit();
+  }
 }
