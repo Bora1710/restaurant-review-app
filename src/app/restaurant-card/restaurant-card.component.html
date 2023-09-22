@@ -9,5 +9,8 @@
 
   <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
 
-  <app-trash-icon (click)="handleClick()"></app-trash-icon>
+  <app-trash-icon
+    *ngIf="trashCanDisplay"
+    (click)="handleClick()"
+  ></app-trash-icon>
 </div>

@@ -9,6 +9,7 @@ import { Restaurant } from '../shared/Models/restaurant';
 export class RestaurantCardComponent {
   @Input() restaurant: Restaurant = new Restaurant();
   @Output() onClick = new EventEmitter();
+  @Input() trashCanDisplay: boolean = false;
 
   handleClick() {
     this.onClick.emit();
