@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant, Review } from '../shared/Models/restaurant';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormGroup } from '@angular/forms';
@@ -19,7 +19,8 @@ export class RestaurantComponent implements OnDestroy {
   constructor(
     private restaurantService: RestaurantService,
     private route: ActivatedRoute,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.restaurantService
@@ -70,5 +71,17 @@ export class RestaurantComponent implements OnDestroy {
       }
     }
     return reviews;
+  }
+
+  deleteRestaurant() {
+    if (window.confirm('Are you sure you want to delete this restaurant?')) {
+      this.restaurantService
+        .deleteRestaurant(this.restaurant.id || '')
+        .subscribe((payLoad) => {
+          if (payLoad) {
+            this.router.navigate(['/restaurants']);
+          }
+        });
+    }
   }
 }

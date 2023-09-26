@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Restaurant } from '../shared/Models/restaurant';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-restaurantcard',
@@ -8,6 +9,13 @@ import { Restaurant } from '../shared/Models/restaurant';
 })
 export class RestaurantCardComponent {
   @Input() restaurant: Restaurant = new Restaurant();
+  @Output() onClick = new EventEmitter();
+  @Input() trashCanDisplay: boolean = false;
+  userInfo = this.authService.userInfo;
 
-  stars = [1, 2, 3, 4, 5];
+  constructor(private authService: AuthenticationService) {}
+
+  handleClick() {
+    this.onClick.emit();
+  }
 }

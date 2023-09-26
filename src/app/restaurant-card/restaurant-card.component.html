@@ -3,9 +3,14 @@
 
   <p>Description: {{ restaurant.description }}</p>
 
-  <p>Date of Creation: {{ restaurant.dateOfCreation }}</p>
+  <p>Date of Creation: {{ restaurant.dateOfCreation | date : "mediumDate" }}</p>
 
   <p>Average rating: {{ restaurant.averageRating || 0 }}</p>
 
   <app-review-stars [rating]="restaurant.averageRating"></app-review-stars>
+
+  <app-trash-icon
+    *ngIf="trashCanDisplay && userInfo.role === 1"
+    (click)="handleClick()"
+  ></app-trash-icon>
 </div>

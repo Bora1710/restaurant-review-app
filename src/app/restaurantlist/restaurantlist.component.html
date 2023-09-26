@@ -6,7 +6,10 @@
   <app-restaurantcard
     [routerLink]="['/restaurants', restaurant.id]"
     [restaurant]="restaurant"
+    [trashCanDisplay]="false"
   ></app-restaurantcard>
 </section>
 
-<button type="button" routerLink="/restaurants/new">Add new restaurant</button>
+<button *ngIf="userInfo.role === 1" type="button" routerLink="/restaurants/new">
+  Add new restaurant
+</button>
