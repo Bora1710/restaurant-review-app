@@ -74,7 +74,7 @@ export class RestaurantComponent implements OnDestroy {
   }
 
   deleteRestaurant() {
-    if (window.confirm('Are you sure you want to delete this recipe?')) {
+    if (window.confirm('Are you sure you want to delete this restaurant?')) {
       this.restaurantService
         .deleteRestaurant(this.restaurant.id || '')
         .subscribe((payLoad) => {
